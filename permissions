@@ -1,0 +1,2 @@
+<uses-permissions android:name="android.permission.CALL_PHONE" />23
+<uses-permissions android:name="android.permission.READ_PHONE_STATE" />
