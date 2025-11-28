@@ -1,0 +1,21 @@
+import Web3 from 'web3';
+import { TrustWallet };
+
+// Inisialisasi Web3
+const web3 = new Web3();
+
+// Inisialisasi Trust Wallet
+const trustWallet = new TrustWallet();
+
+// Fungsi koneksi wallet
+async function connectWallet() {
+  try {
+    const provider = await trustWallet.ethereum.request({
+      method: 'eth_requestAccounts',
+    });
+    const accounts = await web3.eth.getAccounts();
+    console.log('Alamat wallet:', accounts[0]);
+  } catch (error) {
+    console.error('Gagal koneksi wallet:', error);
+  }
+}
