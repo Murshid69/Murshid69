@@ -13,3 +13,26 @@ if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
  // permission already granted — proceed to place call
  startPhoneCall();
 }
+// handle result
+@Override
+public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+ super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+ if (requestCode == REQUEST_CALL_PHONE) {
+ if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+ // granted
+ startPhoneCall();
+ } else {
+ // denied
+ boolean dontAskAgain = !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE);
+ if (dontAskAgain) {
+ // user selected "Don't ask again" — direct them to app settings
+ Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+ Uri uri = Uri.fromParts("package", getPackageName(), null);
+ intent.setData(uri);
+ startActivity(intent);
+ } else {
+ // optionally show message or disable feature
+ }
+ }
+ }
+}
