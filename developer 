@@ -1,0 +1,15 @@
+// check
+if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+ != PackageManager.PERMISSION_GRANTED) {
+ // show rationale?
+ if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
+ // show a dialog explaining why you need the permission, then request
+ } else {
+ ActivityCompat.requestPermissions(this,
+ new String[]{Manifest.permission.CALL_PHONE},
+ REQUEST_CALL_PHONE);
+ }
+} else {
+ // permission already granted — proceed to place call
+ startPhoneCall();
+}
